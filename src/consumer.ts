@@ -5,20 +5,10 @@ const kafka = new Kafka({
   brokers: ["localhost:9092"]
 })
 
-const producer = kafka.producer();
-
-const consumer = kafka.consumer({groupId: "my-app3"});
+const consumer = kafka.consumer({ groupId: "my-app3" });
 
 
 async function main() {
-  await producer.connect();
-  await producer.send({
-    topic: "quickstart-events",
-    messages: [{
-      value: "hi there kese ho brooo...."
-    }]
-  })
-
   await consumer.connect();
   await consumer.subscribe({
     topic: "quickstart-events", fromBeginning: true
